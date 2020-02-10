@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import IsTyping from "./IsTyping";
+
 class App extends React.Component {
   state = {
     name: ""
@@ -13,11 +15,11 @@ class App extends React.Component {
   componentDidMount() {
     const { params } = this.props.match;
 
-    this.setState({ name: params.name });
+    this.setState({ name: decodeURIComponent(params.name) });
   }
 
   render() {
-    return <div>{this.state.name} is typing</div>;
+    return <IsTyping name={this.state.name} />;
   }
 }
 

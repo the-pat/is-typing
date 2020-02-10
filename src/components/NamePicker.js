@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Helmet } from "react-helmet";
 
 class NamePicker extends React.Component {
   name = React.createRef();
@@ -13,15 +14,20 @@ class NamePicker extends React.Component {
 
     const name = this.name.current.value;
 
-    this.props.history.push(`/${name}`);
+    this.props.history.push(`/${encodeURIComponent(name)}`);
   };
 
   render() {
     return (
-      <form className="name-selector" onSubmit={this.goToName}>
-        <input type="text" ref={this.name} required placeholder="Name" />
-        <button type="submit">Is Typing</button>
-      </form>
+      <>
+        <Helmet>
+          <title>Is Typing...</title>
+        </Helmet>
+        <form className="name-selector" onSubmit={this.goToName}>
+          <input type="text" ref={this.name} required placeholder="Name" />
+          <button type="submit">Is Typing...</button>
+        </form>
+      </>
     );
   }
 }
